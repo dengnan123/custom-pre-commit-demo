@@ -1,0 +1,30 @@
+{
+  "name": "custom-pre-commit-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "prepare": "husky install",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "hooks:pre-commit": "node ./hooks/pre-commit.js",
+    "hooks:pre-push": "node ./hooks/pre-push.js"
+  },
+  "husky": {
+    "pre-commit": "npm run hooks:pre-commit",
+    "pre-push": "npm run hooks:pre-push"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dengnan123/custom-pre-commit-demo.git"
+  },
+  "author": "dany",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dengnan123/custom-pre-commit-demo/issues"
+  },
+  "homepage": "https://github.com/dengnan123/custom-pre-commit-demo#readme",
+  "devDependencies": {
+    "husky": "^7.0.1",
+    "shelljs": "^0.8.4"
+  }
+}
