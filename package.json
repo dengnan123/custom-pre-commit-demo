@@ -9,10 +9,6 @@
     "hooks:pre-commit": "node ./hooks/pre-commit.js",
     "hooks:pre-push": "node ./hooks/pre-push.js"
   },
-  "husky": {
-    "pre-commit": "npm run hooks:pre-commit",
-    "pre-push": "npm run hooks:pre-push"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dengnan123/custom-pre-commit-demo.git"
