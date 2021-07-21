@@ -38,8 +38,13 @@ const r = babel.transform(codeStr, {
   plugins: [arrowFnPlugin],
 });
 
+
+
+
 const transformedCode = generate(newast).code;
 console.log("transformedCode", transformedCode);
+
+
 console.log("propertiesproperties", properties);
 
 const { code, stdout } = shell.exec('git show --pretty="" --name-only');
