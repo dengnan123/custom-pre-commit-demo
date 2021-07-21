@@ -3,9 +3,9 @@ const path = require("path");
 const babel = require("@babel/core");
 const t = require("@babel/types");
 const shell = require("shelljs");
-const Ajv = require("ajv")
+const Ajv = require("ajv");
 
-const ajv = new Ajv()
+const ajv = new Ajv();
 const generate = require("@babel/generator").default;
 
 const getCode = (codePath) => {
@@ -72,9 +72,11 @@ const checkWidgetProperties = (widgetProperties) => {
 };
 
 const checkWidgetSchema = (widgetSchema) => {
-  console.log('widgetSchemawidgetSchema',widgetSchema)
-  const validate = ajv.compile(widgetSchema)
-  console.log('validatevalidatevalidate',validate)
+  console.log("widgetSchemawidgetSchema", widgetSchema);
+  const schema = JSON.parse(widgetSchema.trim());
+  console.log("schemaschema", schema);
+  const validate = ajv.compile(schema);
+  console.log("validatevalidatevalidate", validate);
   return true;
 };
 
