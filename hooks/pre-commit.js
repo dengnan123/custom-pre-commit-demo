@@ -38,18 +38,11 @@ const r = babel.transform(codeStr, {
   plugins: [arrowFnPlugin],
 });
 
-
 const transformedCode = generate(newast).code;
 console.log("transformedCode", transformedCode);
-
-
 console.log("propertiesproperties", properties);
 
-// const { code, stdout } = shell.exec('git show --pretty="" --name-only');
-
-const { code, stdout } = shell.exec('git diff --name-only HEAD');
-
-console.log("stdoutstdout", stdout);
+const { code, stdout } = shell.exec("git diff --name-only HEAD");
 
 const arr = stdout.split("\n");
 console.log("arrarrarrarr", arr);

@@ -1,9 +1,7 @@
 import React from "react";
 
 const Test = ({ py, py1, py2 }) => {};
-
 Test.actions = {};
-
 Test.displayName = "22333332222222";
 
 if (process.env.julia_env !== "production") {
