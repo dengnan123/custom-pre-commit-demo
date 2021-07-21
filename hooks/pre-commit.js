@@ -39,8 +39,6 @@ const r = babel.transform(codeStr, {
 });
 
 
-
-
 const transformedCode = generate(newast).code;
 console.log("transformedCode", transformedCode);
 
