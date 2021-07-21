@@ -94,9 +94,9 @@ const checkWidgetCode = async (list) => {
   );
 };
 
-const dofunc = () => {
+const dofunc = async () => {
   const list = getcodePathAndwidgetNameList();
-  checkWidgetCode(list);
+  await checkWidgetCode(list);
 };
 
 dofunc();
