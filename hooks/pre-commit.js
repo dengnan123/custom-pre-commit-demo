@@ -98,7 +98,6 @@ const checkWidgetCode = (list) => {
 
 const dofunc = () => {
   const list = getcodePathAndwidgetNameList();
-  console.log("listlistlistlistlist", list);
   checkWidgetCode(list);
 };
 

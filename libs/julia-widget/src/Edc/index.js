@@ -31,7 +31,7 @@ if (process.env.julia_env !== "production") {
             title: 'card style',
             enum: ['1.0', '1.1', 'tr'],
             default: '1.0',
-          },
+          }
         },
       },
     },
