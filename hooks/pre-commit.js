@@ -47,9 +47,9 @@ console.log("transformedCode", transformedCode);
 
 console.log("propertiesproperties", properties);
 
-const { code, stdout } = shell.exec('git show --pretty="" --name-only');
+// const { code, stdout } = shell.exec('git show --pretty="" --name-only');
 
-// const { code, stdout } = shell.exec('git diff-tree --no-commit-id --name-only');
+const { code, stdout } = shell.exec('git diff HEAD');
 
 console.log("stdoutstdout", stdout);
 
