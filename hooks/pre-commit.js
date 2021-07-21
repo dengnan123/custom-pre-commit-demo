@@ -96,7 +96,11 @@ const checkWidgetCode = async (list) => {
 
 const dofunc = async () => {
   const list = getcodePathAndwidgetNameList();
-  await checkWidgetCode(list);
+  try {
+    await checkWidgetCode(list);
+  } catch (err) {
+    throw new Error(err);
+  }
 };
 
 dofunc();
