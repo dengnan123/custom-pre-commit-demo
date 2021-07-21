@@ -45,3 +45,6 @@ console.log("propertiesproperties", properties);
 const { code, stdout } = shell.exec('git show --pretty="" --name-only');
 
 console.log("stdoutstdout", stdout);
+
+const arr = stdout.split('\n')
+console.log('arrarrarrarr',arr)
