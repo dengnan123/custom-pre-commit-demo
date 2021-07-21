@@ -9,7 +9,7 @@ const getCode = () => {
   return fs.readFileSync("index.js").toString();
 };
 
-const code = getCode();
+const codeStr = getCode();
 
 const isSchema = (node) => {
   return (
@@ -34,7 +34,7 @@ const arrowFnPlugin = {
     },
   },
 };
-const r = babel.transform(code, {
+const r = babel.transform(codeStr, {
   plugins: [arrowFnPlugin],
 });
 
@@ -42,6 +42,6 @@ const transformedCode = generate(newast).code;
 console.log("transformedCode", transformedCode);
 console.log("propertiesproperties", properties);
 
-const res = shell.exec('git show --pretty="" --name-only');
+const { code, stdout } = shell.exec('git show --pretty="" --name-only');
 
-console.log("resresres", res);
+console.log("stdoutstdout", stdout);
