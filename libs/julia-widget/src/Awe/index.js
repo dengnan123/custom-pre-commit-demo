@@ -9,8 +9,8 @@ if (process.env.julia_env !== "production") {
     title: "Awe",
     type: "object",
     properties: {
-      a: 123,
-      b: 234,
+      a: {},
+      b: {},
     },
   };
 }

@@ -6,11 +6,34 @@ Edc.displayName = "2233334444432333222222";
 
 if (process.env.julia_env !== "production") {
   Edc.schema = {
-    title: "Edc",
-    type: "object",
+    type: 'object',
+    title: 'PriceTicker',
     properties: {
-      a: 1244443,
-      b: 234,
+      config: {
+        type: 'object',
+        title: 'Binance"s trade list ',
+        required: ['pairs'],
+        properties: {
+          pairs: {
+            type: 'array',
+            title: 'Trade Pairs',
+            items: {
+              type: 'object',
+              required: ['baseAsset', 'quoteAsset'],
+              properties: {
+                baseAsset: { title: 'baseAsset,e.g. BTC', type: 'string' },
+                quoteAsset: { title: 'quoteAsset,e.g. BTC', type: 'string' },
+              },
+            },
+          },
+          version: {
+            type: 'string',
+            title: 'card style',
+            enum: ['1.0', '1.1', 'tr'],
+            default: '1.0',
+          },
+        },
+      },
     },
   };
 }

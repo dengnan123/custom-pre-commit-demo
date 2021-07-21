@@ -73,7 +73,8 @@ const checkWidgetProperties = (widgetProperties) => {
 
 const checkWidgetSchema = (widgetSchema) => {
   console.log("widgetSchemawidgetSchema", widgetSchema);
-  const schema = JSON.parse(widgetSchema.trim());
+  // const schema = JSON.parse(widgetSchema.trim());
+  const schema = eval("(" + widgetSchema + ")");
   console.log("schemaschema", schema);
   const validate = ajv.compile(schema);
   console.log("validatevalidatevalidate", validate);
