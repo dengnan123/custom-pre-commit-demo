@@ -5,44 +5,98 @@ const t = require("@babel/types");
 const shell = require("shelljs");
 const generate = require("@babel/generator").default;
 
-const getCode = () => {
-  return fs.readFileSync("index.js").toString();
+const getCode = (codePath) => {
+  return fs.readFileSync(codePath).toString();
 };
 
-const codeStr = getCode();
+const initWidgetProperties = ["actions", "displayName", "schema"];
 
-const isSchema = (node) => {
+const reg = /libs\/julia-widget\/src\/[a-z\/]*\/index.js/i;
+
+const getcodePathAndwidgetNameList = () => {
+  const { stdout } = shell.exec("git diff --name-only HEAD");
+  return stdout
+    .split("\n")
+    .filter((v) => {
+      return reg.test(v);
+    })
+    .map((v) => {
+      const strArr = v.split("/");
+      return {
+        widgetName: strArr[strArr.length - 2],
+        codePath: v,
+      };
+    });
+};
+
+const getSchemaAndWidgetProperties = (codeStr, widgetName) => {
+  const isSchema = (node) => {
+    return (
+      node.left.property.name === "schema" &&
+      node.left.object.name === widgetName
+    );
+  };
+  let schemaAst;
+  let properties = [];
+  const arrowFnPlugin = {
+    visitor: {
+      AssignmentExpression(path) {
+        if (isSchema(path.node)) {
+          schemaAst = path.node.right;
+        }
+      },
+      MemberExpression(path) {
+        if (path.node.object.name === widgetName) {
+          properties.push(path.node.property.name);
+        }
+      },
+    },
+  };
+  babel.transform(codeStr, {
+    plugins: [arrowFnPlugin],
+  });
+  const transformedCode = generate(schemaAst).code;
+  return {
+    widgetProperties: properties,
+    widgetSchema: transformedCode,
+  };
+};
+
+const checkWidgetProperties = (widgetProperties) => {
   return (
-    node.left.property.name === "schema" && node.left.object.name === "Test"
+    JSON.stringify(widgetProperties) === JSON.stringify(initWidgetProperties)
   );
 };
 
-let newast;
-let properties = [];
-
-const arrowFnPlugin = {
-  visitor: {
-    AssignmentExpression(path) {
-      if (isSchema(path.node)) {
-        newast = path.node.right;
-      }
-    },
-    MemberExpression(path) {
-      if (path.node.object.name === "Test") {
-        properties.push(path.node.property.name);
-      }
-    },
-  },
+const checkWidgetSchema = (widgetSchema) => {
+  return true;
 };
-const r = babel.transform(codeStr, {
-  plugins: [arrowFnPlugin],
-});
 
-const transformedCode = generate(newast).code;
-console.log("transformedCode", transformedCode);
-console.log("propertiesproperties", properties);
+const checkWidgetCode = async (list) => {
+  const check = async ({ codePath, widgetName }) => {
+    const codeStr = getCode(codePath);
+    const { widgetProperties, widgetSchema } = getSchemaAndWidgetProperties(
+      codeStr,
+      widgetName
+    );
+    if (!checkWidgetProperties(widgetProperties)) {
+      throw new Error(`${codePath} WidgetProperties error`);
+    }
+    if (!checkWidgetSchema(widgetSchema)) {
+      throw new Error(`${codePath} WidgetSchema error`);
+    }
+  };
 
-const { code, stdout } = shell.exec("git diff --name-only HEAD");
+  await Promise.all(
+    list.map((v) => {
+      return check(v);
+    })
+  );
+};
 
-const arr = stdout.split("\n").filter((v) => v);
-console.log("arrarrarrarr", arr);
+const dofunc = async () => {
+  const list = getcodePathAndwidgetNameList();
+  await checkWidgetCode(list);
+};
+
+dofunc();
