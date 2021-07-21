@@ -1,18 +1,10 @@
 import React from "react";
 
-
-
-
-
 const Test = ({ py, py1, py2 }) => {};
 
 Test.actions = {};
 
-
-
-Test.displayName = "2222";
-
-
+Test.displayName = "222222222";
 
 if (process.env.julia_env !== "production") {
   Test.schema = {

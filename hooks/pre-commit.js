@@ -49,7 +49,7 @@ console.log("propertiesproperties", properties);
 
 // const { code, stdout } = shell.exec('git show --pretty="" --name-only');
 
-const { code, stdout } = shell.exec('git diff HEAD');
+const { code, stdout } = shell.exec('git diff --name-only HEAD');
 
 console.log("stdoutstdout", stdout);
 
