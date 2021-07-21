@@ -44,5 +44,5 @@ console.log("propertiesproperties", properties);
 
 const { code, stdout } = shell.exec("git diff --name-only HEAD");
 
-const arr = stdout.split("\n").filter(v => v);
+const arr = stdout.split("\n").filter((v) => v);
 console.log("arrarrarrarr", arr);
