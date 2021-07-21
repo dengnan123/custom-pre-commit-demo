@@ -1,1 +1,18 @@
-const a = 123222333322221231232322223312312332222242342342324444444123123
+import React from "react";
+
+const Awe = ({ py, py1, py2 }) => {};
+Awe.actions = {};
+Awe.displayName = "22333332222222";
+
+if (process.env.julia_env !== "production") {
+  Awe.schema = {
+    title: "Awe",
+    type: "object",
+    properties: {
+      a: 123,
+      b: 234,
+    },
+  };
+}
+
+export default React.memo(Awe);

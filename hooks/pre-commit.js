@@ -18,7 +18,7 @@ const getcodePathAndwidgetNameList = () => {
   return stdout
     .split("\n")
     .filter((v) => {
-      return reg.test(v);
+      return reg.test(v) && fs.existsSync(v);
     })
     .map((v) => {
       const strArr = v.split("/");
@@ -72,13 +72,15 @@ const checkWidgetSchema = (widgetSchema) => {
   return true;
 };
 
-const checkWidgetCode = async (list) => {
-  const check = async ({ codePath, widgetName }) => {
+const checkWidgetCode = (list) => {
+  const check = ({ codePath, widgetName }) => {
     const codeStr = getCode(codePath);
     const { widgetProperties, widgetSchema } = getSchemaAndWidgetProperties(
       codeStr,
       widgetName
     );
+    console.log("codePath widgetProperties", codePath, widgetProperties);
+    console.log("codePath widgetSchema", codePath, widgetSchema);
     if (!checkWidgetProperties(widgetProperties)) {
       throw new Error(`${codePath} WidgetProperties error`);
     }
@@ -86,21 +88,15 @@ const checkWidgetCode = async (list) => {
       throw new Error(`${codePath} WidgetSchema error`);
     }
   };
-
-  await Promise.all(
-    list.map((v) => {
-      return check(v);
-    })
-  );
+  for (const v of list) {
+    check(v);
+  }
 };
 
-const dofunc = async () => {
+const dofunc = () => {
   const list = getcodePathAndwidgetNameList();
-  try {
-    await checkWidgetCode(list);
-  } catch (err) {
-    throw new Error(err);
-  }
+  console.log("listlistlistlistlist", list);
+  checkWidgetCode(list);
 };
 
 dofunc();
