@@ -42,6 +42,6 @@ const transformedCode = generate(newast).code;
 console.log("transformedCode", transformedCode);
 console.log("propertiesproperties", properties);
 
-const res = shell.exec('git show --pretty="" --name-only', (res) => {
-  console.log("eeeee", res);
-});
+const res = shell.exec('git show --pretty="" --name-only');
+
+console.log("resresres", res);
