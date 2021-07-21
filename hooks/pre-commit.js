@@ -79,8 +79,6 @@ const checkWidgetCode = (list) => {
       codeStr,
       widgetName
     );
-    console.log("codePath widgetProperties", codePath, widgetProperties);
-    console.log("codePath widgetSchema", codePath, widgetSchema);
     if (!checkWidgetProperties(widgetProperties)) {
       throw new Error(`${codePath} WidgetProperties error`);
     }
