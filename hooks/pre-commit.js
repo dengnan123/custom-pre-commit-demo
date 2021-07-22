@@ -45,7 +45,7 @@ const getSchemaAndWidgetProperties = ({ codeStr, widgetName, codePath }) => {
       },
     },
   }
-  babel.transform(codeStr, {
+  babel.transformFileSync(codePath, {
     plugins: [arrowFnPlugin],
     presets: ['@babel/typescript'],
     filename: codePath,
