@@ -56,11 +56,7 @@ const getSchemaAndWidgetProperties = (codeStr, widgetName) => {
   babel.transform(codeStr, {
     plugins: [arrowFnPlugin],
   });
-  const transformedCode = generate(schemaAst, {
-    jsescOption: {
-      json: true,
-    },
-  }).code;
+  const transformedCode = generate(schemaAst).code;
   return {
     widgetProperties: properties,
     widgetSchema: transformedCode,
@@ -74,10 +70,8 @@ const checkWidgetProperties = (widgetProperties) => {
 };
 
 const checkWidgetSchema = (widgetSchema) => {
-  console.log('widgetSchemawidgetSchema',widgetSchema)
-  console.log('obj',JSON.parse(widgetSchema))
-  // const schema = eval("(" + widgetSchema + ")");
-  // ajv.compile(schema);
+  const schema = eval("(" + widgetSchema + ")");
+  ajv.compile(schema);
   return true;
 };
 
