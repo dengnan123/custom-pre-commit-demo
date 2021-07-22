@@ -26,5 +26,8 @@
     "ajv": "^8.6.2",
     "husky": "^7.0.1",
     "shelljs": "^0.8.4"
+  },
+  "dependencies": {
+    "safe-json-parse": "^4.0.0"
   }
 }

@@ -3,6 +3,7 @@ const babel = require("@babel/core");
 const shell = require("shelljs");
 const Ajv = require("ajv");
 const generate = require("@babel/generator").default;
+var safeParse = require("safe-json-parse");
 const ajv = new Ajv();
 
 const getCode = (codePath) => {
@@ -55,7 +56,11 @@ const getSchemaAndWidgetProperties = (codeStr, widgetName) => {
   babel.transform(codeStr, {
     plugins: [arrowFnPlugin],
   });
-  const transformedCode = generate(schemaAst).code;
+  const transformedCode = generate(schemaAst, {
+    jsescOption: {
+      json: true,
+    },
+  }).code;
   return {
     widgetProperties: properties,
     widgetSchema: transformedCode,
@@ -69,14 +74,10 @@ const checkWidgetProperties = (widgetProperties) => {
 };
 
 const checkWidgetSchema = (widgetSchema) => {
+  console.log('widgetSchemawidgetSchema',widgetSchema)
+  console.log('obj',JSON.parse(widgetSchema))
   // const schema = eval("(" + widgetSchema + ")");
-  console.log("widgetSchemawidgetSchema", widgetSchema);
-  const arr = widgetSchema.split("\n").join("").trim();
-  const b = JSON.stringify(arr);
-  // console.log('bbb',b)
-  // console.log("aaaaa-----", arr);
-  const schema = JSON.parse(b);
-  ajv.compile(schema);
+  // ajv.compile(schema);
   return true;
 };
 
