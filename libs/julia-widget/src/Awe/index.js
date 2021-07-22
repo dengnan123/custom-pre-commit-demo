@@ -11,6 +11,7 @@ if (process.env.julia_env !== "production") {
     type: "object",
     properties: {
       ...BASE_CONFIG,
+      f:123,
       a: {},
       b: {},
     },
