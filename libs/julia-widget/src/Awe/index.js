@@ -1,4 +1,5 @@
 import React from "react";
+import { BASE_CONFIG } from "./test";
 
 const Awe = ({ py, py1, py2 }) => {};
 Awe.actions = {};
@@ -9,6 +10,7 @@ if (process.env.julia_env !== "production") {
     title: "Awe",
     type: "object",
     properties: {
+      ...BASE_CONFIG,
       a: {},
       b: {},
     },
