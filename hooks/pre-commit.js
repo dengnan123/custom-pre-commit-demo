@@ -3,7 +3,6 @@ const babel = require("@babel/core");
 const shell = require("shelljs");
 const Ajv = require("ajv");
 const generate = require("@babel/generator").default;
-
 const ajv = new Ajv();
 
 const getCode = (codePath) => {
@@ -12,7 +11,7 @@ const getCode = (codePath) => {
 
 const initWidgetProperties = ["actions", "displayName", "schema"];
 
-const reg = /libs\/julia-widget\/src\/[a-z\/]*\/index.js/i;
+const reg = /libs\/julia-widget\/src\/[a-z/]*\/index.js/i;
 
 const getcodePathAndwidgetNameList = () => {
   const { stdout } = shell.exec("git diff --name-only HEAD");
@@ -70,7 +69,13 @@ const checkWidgetProperties = (widgetProperties) => {
 };
 
 const checkWidgetSchema = (widgetSchema) => {
-  const schema = eval("(" + widgetSchema + ")");
+  // const schema = eval("(" + widgetSchema + ")");
+  console.log("widgetSchemawidgetSchema", widgetSchema);
+  const arr = widgetSchema.split("\n").join("").trim();
+  const b = JSON.stringify(arr);
+  // console.log('bbb',b)
+  // console.log("aaaaa-----", arr);
+  const schema = JSON.parse(b);
   ajv.compile(schema);
   return true;
 };
@@ -94,14 +99,10 @@ const checkWidgetCode = (list) => {
   }
 };
 
-const dofunc = () => {
-  try {
-    const list = getcodePathAndwidgetNameList();
-    checkWidgetCode(list);
-  } catch (e) {
-    // console.error(e.message);
-    // process.exit(1);
-  }
-};
-
-dofunc();
+try {
+  const list = getcodePathAndwidgetNameList();
+  checkWidgetCode(list);
+} catch (e) {
+  console.log(e.message);
+  process.exit(1);
+}

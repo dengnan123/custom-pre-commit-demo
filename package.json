@@ -6,8 +6,8 @@
   "scripts": {
     "prepare": "husky install",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "hooks:pre-commit": "node ./hooks/pre-commit.js",
-    "hooks:pre-push": "node ./hooks/pre-push.js"
+    "pre-commit": "node ./hooks/pre-commit.js",
+    "pre-push": "node ./hooks/pre-push.js"
   },
   "repository": {
     "type": "git",
