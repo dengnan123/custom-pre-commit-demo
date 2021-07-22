@@ -10,8 +10,7 @@ if (process.env.julia_env !== "production") {
     title: "Awe",
     type: "object",
     properties: {
-      ...BASE_CONFIG,
-      f:122223,
+      f:{},
       a: {},
       b: {},
     },

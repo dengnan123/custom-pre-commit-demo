@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/dengnan123/custom-pre-commit-demo#readme",
   "devDependencies": {
+    "@babel/cli": "^7.14.8",
     "@babel/core": "^7.14.8",
     "@babel/generator": "^7.14.8",
     "@babel/preset-env": "^7.14.8",
@@ -27,6 +28,7 @@
     "@babel/types": "^7.14.8",
     "ajv": "^8.6.2",
     "husky": "^7.0.1",
+    "rollup": "^2.53.3",
     "shelljs": "^0.8.4"
   },
   "dependencies": {

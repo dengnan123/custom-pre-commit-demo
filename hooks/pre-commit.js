@@ -11,7 +11,7 @@ const getCode = codePath => fs.readFileSync(codePath).toString()
 const initWidgetProperties = ['actions', 'displayName', 'schema']
 
 // eslint-disable-next-line no-useless-escape
-const reg = /libs\/julia-widget\/src\/[a-z\/-]*\/index.tsx/i
+const reg = /libs\/julia-widget\/src\/[a-z\/-]*\/index.js/i
 
 const getcodePathAndwidgetNameList = () => {
   const { stdout } = shell.exec('git diff --name-only HEAD')
