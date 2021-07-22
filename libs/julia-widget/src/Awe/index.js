@@ -11,7 +11,9 @@ if (process.env.julia_env !== "production") {
     properties: {
       a: {},
       b: {},
+      d:123
     },
+    c:123
   };
 }
 

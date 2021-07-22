@@ -1,12 +1,10 @@
 const fs = require("fs");
-const path = require("path");
 const babel = require("@babel/core");
-const t = require("@babel/types");
 const shell = require("shelljs");
 const Ajv = require("ajv");
+const generate = require("@babel/generator").default;
 
 const ajv = new Ajv();
-const generate = require("@babel/generator").default;
 
 const getCode = (codePath) => {
   return fs.readFileSync(codePath).toString();
@@ -97,8 +95,13 @@ const checkWidgetCode = (list) => {
 };
 
 const dofunc = () => {
-  const list = getcodePathAndwidgetNameList();
-  checkWidgetCode(list);
+  try {
+    const list = getcodePathAndwidgetNameList();
+    checkWidgetCode(list);
+  } catch (e) {
+    // console.error(e.message);
+    // process.exit(1);
+  }
 };
 
 dofunc();
